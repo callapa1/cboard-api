@@ -354,7 +354,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
   /translate:
     x-swagger-router-controller: translate
     post:
@@ -371,7 +370,22 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
+  /tts:
+    x-swagger-router-controller: tts
+    post:
+      operationId: tts
+      description: Returns an audio stream for the text query.
+      parameters:
+        - $ref: '#/parameters/Translate'
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/TranslateResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /settings:
     x-swagger-router-controller: settings
     post:
