@@ -742,12 +742,14 @@
 					"listen": "test",
 					"script": {
 						"id": "e3034a60-7774-4342-822f-7c4611c6694e",
-						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
-						]
+							"});",
+							"pm.globals.set(\"boardid\",pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -821,6 +823,239 @@
 						"board",
 						"byemail",
 						"{{email}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/tts/ es",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86d59d1d-3761-4c2f-aba7-0900abd11f0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"otorrinolaringología\",\r\n  \"language\": \"es\",\r\n  \"speed\": 0.9\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/tts/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/tts/ hr",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86d59d1d-3761-4c2f-aba7-0900abd11f0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"molim\",\r\n  \"language\": \"hr\",\r\n  \"speed\": 0.9\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/tts/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/tts/ sr",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86d59d1d-3761-4c2f-aba7-0900abd11f0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"молим\",\r\n  \"language\": \"sr\",\r\n  \"speed\": 0.9\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/tts/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/tts/ ar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86d59d1d-3761-4c2f-aba7-0900abd11f0d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"من فضلك\",\r\n  \"language\": \"ar\",\r\n  \"speed\": 0.9\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/tts/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"tts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/board/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e3034a60-7774-4342-822f-7c4611c6694e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/board/{{boardid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"board",
+						"{{boardid}}"
 					]
 				}
 			},
