@@ -19,6 +19,7 @@
     "email-verification": "^0.4.6",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "google-tts-api": "0.0.4",
     "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.7",

@@ -110,10 +110,16 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/Translate" 
+  Tts:
+    name: tts
+    in: body
+    description: Query data 
+    required: true
+    schema:
+      $ref: "#/definitions/Tts" 
 paths:
   /swagger:
     x-swagger-pipe: swagger_raw
-    
   /languages:
     x-swagger-router-controller: languages
     get:
@@ -376,12 +382,12 @@ paths:
       operationId: tts
       description: Returns an audio stream for the text query.
       parameters:
-        - $ref: '#/parameters/Translate'
+        - $ref: '#/parameters/Tts'
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/TranslateResponse"
+            $ref: "#/definitions/TtsResponse"
         default:
           description: Error
           schema:
@@ -424,7 +430,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
   /communicator:
     x-swagger-router-controller: communicator
     post:
@@ -577,7 +582,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
   /media:
     x-swagger-router-controller: media
     post:
@@ -601,7 +605,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
   /board:
     x-swagger-router-controller: board
     post:
@@ -922,6 +925,18 @@ definitions:
           type: string
         password:
           type: string
+  Tts:
+      type: object
+      required:
+      - query
+      - language
+      properties:
+        query:
+          type: string
+        language:
+          type: string
+        speed:
+          type: number
   GeneralResponse:
     type: object
     properties:
@@ -1214,3 +1229,9 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Board"
+  TtsResponse:
+    required:
+      - url
+    properties:
+      url:
+        type: string
