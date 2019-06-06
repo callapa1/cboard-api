@@ -11,6 +11,7 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "azure-storage": "^2.10.2",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^2.0.3",
