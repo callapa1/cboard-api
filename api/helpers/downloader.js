@@ -41,7 +41,7 @@ async function  download(url, filepath) {
 
     return new Promise((resolve) => {
         filestream.data.on('end', () => {
-            resolve(true);
+            resolve(filepath);
         });
 
         filestream.data.on('error', (err) => {
