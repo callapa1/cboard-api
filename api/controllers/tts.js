@@ -18,9 +18,8 @@ async function ttsRequest(req, res) {
         const key = await googleTTSKey();
         const url = await googleTTSApi(query, key, language, speed);
 
-        const audioStream = await downloader.getRemoteFileStream(url);
-        console.log(audioStream.data);
-        const audioUrl = await storage.uploadBlobFromStream('google-tts', audioStream.data, 'audio');
+        await downloader.download(url, '.');
+        const audioUrl = await storage.uploadBlobFromFile('google-tts', './translate_tts.mpga', 'audio');
 
         const audio = new Audio({
             locale: language,

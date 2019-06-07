@@ -7,7 +7,7 @@ const BLOB_CONTAINER_NAME = process.env.BLOB_CONTAINER_NAME || 'cblob';
 
 module.exports = {
     uploadBlob,
-    uploadBlobFromStream
+    uploadBlobFromFile
 };
 
 async function uploadBlob(file, container = BLOB_CONTAINER_NAME) {
@@ -27,16 +27,15 @@ async function uploadBlob(file, container = BLOB_CONTAINER_NAME) {
 }
 
 
-async function uploadBlobFromStream(name, stream, container = BLOB_CONTAINER_NAME) {
+async function uploadBlobFromFile(name, fileLocation, container = BLOB_CONTAINER_NAME) {
     let url = null;
 
     try {
         await createContainerIfNotExists(container);
-        const uploadedFile = await createBlockBlobFromStream(
+        const uploadedFile = await createBlockBlobFromFile(
             container,
             name,
-            stream,
-            stream.length
+            fileLocation
         );
         url = blobService.getUrl(uploadedFile.container, uploadedFile.name);
     } catch (e) {
@@ -94,11 +93,11 @@ async function createBlockBlobFromText(shareName, file) {
     return result;
 }
 
-async function createBlockBlobFromStream(shareName, name, stream, streamLength) {
+async function createBlockBlobFromFile(shareName, name, fileLocation) {
 
     const options = {};
 
-    const mimetype = stream.headers ? stream.headers['content-type'] : mime.lookup('.mpga')  ;
+    const mimetype = mime.lookup(name)  ;
     const ext = mime.extension(mimetype) || 'mpga';
 
     if (mimetype && mimetype.length) {
@@ -114,11 +113,10 @@ async function createBlockBlobFromStream(shareName, name, stream, streamLength) 
     const filename = `${ts}_${uuidSuffix}_${name.toLowerCase().trim()}.${ext}`;
 
     const result = await new Promise((resolve, reject) => {
-        blobService.createBlockBlobFromStream(
+        blobService.createBlockBlobFromLocalFile(
             shareName,
             filename,
-            stream,
-            streamLength,
+            fileLocation,
             options,
             function (error, result) {
                 if (!error) {
